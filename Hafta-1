@@ -1,0 +1,35 @@
+#boyutu n olan tek boyutlu dizi üretip bu diziyi bubble ve selection sort ile sıralayın.Dizi üzerinde arama
+#islemi yapan fonksiyonu yazınız.Sıralanmış dizi üzerinde ikili arama yapan fonksiyonu yazın.
+import random
+def generate_an_array(n):
+    my_array=[]
+    for i in range(n):
+        s=random.randint(0,100)
+        my_array.append(s)
+    return my_array
+my_arr_1=generate_an_array(10)
+print(my_arr_1)
+def bubble_sort(my_array):
+    for i in range(len(my_array)-1,0,-1):
+        for j in range(i):
+            if(my_array[j]>my_array[j+1]):
+                t=my_array[j]
+                my_array[j]=my_array[j+1]
+                my_array[j+1]=t
+
+
+bubble_sort(my_arr_1)
+print(my_arr_1)
+
+def my_search_c(array_2,item):
+    found=False
+    indis=-1
+    step=0
+    for i in range(len(array_2)):
+        step+=1
+        if(array_2[i]==item):
+            found=True
+            indis=1
+            break
+    return (found,indis,step)
+print(my_search_c(my_arr_1,42))
