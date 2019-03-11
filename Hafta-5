@@ -1,0 +1,11 @@
+#Verilen listede ardisik uc sayinin toplaminin en buyuk oldugu durumu veren program
+
+liste=(5, 1, 2, 3, 7, 8, -2, 3, 9)
+enb=0
+for i in range(0,len(liste)-2):
+    toplam=liste[i]+liste[i+1]+liste[i+2]
+    if(toplam>enb):
+        enb=toplam
+        a=i
+print("en buyuk toplam degeri:",enb)
+print("toplamı olusturan sayilerin index degerleri:",a,a+1,a+2)
