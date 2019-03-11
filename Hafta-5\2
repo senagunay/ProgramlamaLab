@@ -1,0 +1,21 @@
+# Verilen sayinin asal carpanlarini bulup listeleyen bir program yazin.
+# Sayi asal ise program sayinin kendisini dondurmeli.
+
+def asal_mi(a):
+    if(a==2):
+        return True
+    for i in range(2,int((a/2)+1)):
+        if(a%i==0):
+            return False
+    return True
+
+def asal_carpan(n):
+    if(asal_mi(n)==True):
+        print (n)
+    for j in range(2,int((n/2)+1)):
+        if(n%j==0):
+            asal_mi(j)
+            if (asal_mi(j)==True):
+                while(n%j==0):
+                    n=n/j
+                    print(j)
