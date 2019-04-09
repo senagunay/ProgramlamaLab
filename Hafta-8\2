@@ -1,0 +1,37 @@
+import random
+def my_function_create(m,n):
+    my_list=[]
+    for i in range(m):
+        my_list.append([])
+        for j in range(n):
+            s=random.randint(-2,2)
+            #s=-1
+            my_list[i].append(s)
+    return my_list
+
+def my_function_print(mylist):
+    m=len(mylist)
+    n=len(mylist[0])
+    for i in range(m):
+        for j in range(n):
+            print(mylist[i][j],end=" ")
+        print()
+
+def my_function_convert_to_hash(mylist):
+    my_dict={}
+    m = len(mylist)
+    n = len(mylist[0])
+    for i in range(m):
+        for j in range(n):
+            my_dict[(i,j)]=mylist[i][j]
+    return my_dict
+
+def my_function_print_hash(myHashList):
+    print(" ")
+    for key in myHashList:
+        print(myHashList[key],end=" ")
+
+my_2d_array=my_function_create(3,2)
+my_function_print(my_2d_array)
+my_2d_hash=my_function_convert_to_hash(my_2d_array)
+my_function_print_hash(my_2d_hash)
