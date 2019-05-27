@@ -1,0 +1,93 @@
+import random
+# 3. SINAV SORUSU
+def get_n_points(n):
+    points = []
+    for i in range(n):
+        x=random.randint(-10,10)
+        y=random.randint(-10,10)
+        points.append([x,y])
+    return points
+
+
+def get_distance(p_1, p_2):
+    a=p_2[0]-p_1[0]
+    b=p_2[1]-p_1[1]
+    return (a**2+b**2)**0.5
+
+
+def get_center(points):
+    x_s = [i for i, j in points]
+    y_s = [j for i, j in points]
+
+    center_x = sum(x_s) / len(x_s)
+    center_y = sum(y_s) / len(y_s)
+
+    return center_x, center_y
+
+
+def get_distance_for_n_point(points):
+    center = get_center(points)
+    distance=[]
+    for p in points:
+        a=(p[0]-center[0])
+        b=(p[1]-center[1])
+        distance.append((a**2+b**2)**0.5)
+    return distance
+
+
+def myselectionSort(points):
+    n=len(points)
+    center = get_center(points)
+    sayac1=0
+    sayac2=0
+    for i in range(n):
+        for j in range(i+1, n):
+            a= get_distance(points[i],center)
+            b= get_distance(points[j],center)
+            sayac1 = sayac1+1 #karsilastirma ~ comprasion
+            if(a>b):
+                sayac2 +=1 # degistirme ~ swap
+                temp=points[i]
+                points[i]=points[j]
+                points[j]=temp
+    return points,sayac1,sayac2
+
+
+points_1 = get_n_points(10)
+print("ilk hali =", points_1)
+print(get_center(points_1))
+print("Sıralı hali =", myselectionSort(points_1))
+
+## 1. SINAV SORUSU
+
+def maxVal(toConsider, avail):
+    """Assumes toConsider a list of items, avail a weight
+    Returns a tuple of the total value of a solution to the
+    0/1 knapsack problem and the items of that solution"""
+    if toConsider == [] or avail == 0:
+        result = (0, ())
+    elif toConsider[0][2] > avail:
+        #Explore right branch only
+        result = maxVal(toConsider[1:], avail)
+    else:
+        nextItem = toConsider[0]
+        #Explore left branch
+        withVal, withToTake = maxVal(toConsider[1:],avail - nextItem[2])
+        withVal += nextItem[1]
+        #Explore right branch
+        withoutVal, withoutToTake = maxVal(toConsider[1:], avail)
+        #Choose better branch
+        if withVal > withoutVal:
+            result = (withVal, withToTake + (nextItem,))
+        else:
+            result = (withoutVal, withoutToTake)
+    return result
+
+
+item_1 = ['a',6,3]
+item_2 = ['b',7,3]
+item_3 = ['c',8,2]
+item_4 = ['d',9,5]
+items =[item_1,item_2,item_3,item_4]
+
+print(maxVal(items, 5))
